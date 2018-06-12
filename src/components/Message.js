@@ -5,7 +5,7 @@ const Message = (props) => {
     return (
         <div className="message">
             {username}            
-            <span className="message-content">{props.message.message}</span>
+            <span className="message-content">{props.message.content}</span>
         </div>
     )
 }

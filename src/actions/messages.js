@@ -11,10 +11,3 @@ export const incomingNotification = (message) => (
         message: message
     }
 )
-
-export const outcomingMessage = (message) => (
-    {
-        type: 'outcoming_message',
-        message: message
-    }
-)

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {outcomingMessage, outcomingNotification} from '../actions/messages';
 import {changeName} from '../actions/currentUser';
 
 class Chatbar extends React.Component{
@@ -12,13 +11,18 @@ class Chatbar extends React.Component{
 
     handleUsernameKeyPress(e){
         if (e.key === 'Enter'){
-            this.props.dispatch(changeName(e.target.value, {message: `${this.props.currentUsername} changed their name to ${e.target.value}`}));
+            let name = e.target.value;
+            if(name === ''){
+                name = 'Anonymous'
+            }
+            this.props.dispatch(changeName(name));
+            this.props.socket.send(JSON.stringify({type: 'incomingNotification', content: `${this.props.currentUsername} changed their name to ${name}`}));
         }
     }
 
     handleMessageKeyPress(e){
         if (e.key === 'Enter'){
-            this.props.dispatch(outcomingMessage({username: this.props.currentUsername, message: e.target.value}));
+            this.props.socket.send(JSON.stringify({type: 'incomingMessage', content: e.target.value, username: this.props.currentUsername}));
             e.target.value = '';
         }
     }
