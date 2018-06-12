@@ -11,3 +11,17 @@ export const incomingNotification = (message) => (
         message: message
     }
 )
+
+export const postMessage = (message) => (
+    {
+        type: 'post_message',
+        message: message
+    }
+)
+
+export const postNotification = (message) => (
+    {
+        type: 'post_notification',
+        message: message
+    }
+)

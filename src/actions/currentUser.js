@@ -1,5 +1,4 @@
-export const changeName = (name = 'Annoymous', message) => ({
+export const changeName = (name = 'Annoymous') => ({
     type: 'change_name',
-    name: name,
-    message: message
+    name: name
 })

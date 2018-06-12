@@ -16,13 +16,14 @@ class Chatbar extends React.Component{
                 name = 'Anonymous'
             }
             this.props.dispatch(changeName(name));
-            this.props.socket.send(JSON.stringify({type: 'incomingNotification', content: `${this.props.currentUsername} changed their name to ${name}`}));
+            this.props.socket.send(JSON.stringify({type: 'change_name', username: name}));
+            this.props.socket.send(JSON.stringify({type: 'post_notification', content: `${this.props.currentUsername} changed their name to ${name}`}));
         }
     }
 
     handleMessageKeyPress(e){
         if (e.key === 'Enter'){
-            this.props.socket.send(JSON.stringify({type: 'incomingMessage', content: e.target.value, username: this.props.currentUsername}));
+            this.props.socket.send(JSON.stringify({type: 'post_message', content: e.target.value, username: this.props.currentUsername}));
             e.target.value = '';
         }
     }

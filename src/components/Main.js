@@ -1,9 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {incomingMessage, incomingNotification} from '../actions/messages';
+import {incomingMessage, incomingNotification, postMessage, postNotification} from '../actions/messages';
+import {changeUserList} from '../actions/userList';
+import {changeName} from '../actions/currentUser';
 import Nav from './Nav';
 import ChatBar from './ChatBar';
 import MessageList from './MessageList';
+import UserList from './UserList';
 
 class Main extends React.Component {
     constructor(props){
@@ -16,10 +19,27 @@ class Main extends React.Component {
     componentDidMount() {
         this.socket.onmessage = (event) => {
             const message = JSON.parse(event.data)
-            if(message.type === "incomingNotification"){
-                this.props.dispatch(incomingNotification(message))
-            } else if(message.type === "incomingMessage"){
-                this.props.dispatch(incomingMessage(message))
+            switch(message.type) {
+                case "incoming_notification":
+                    this.props.dispatch(incomingNotification(message));
+                    break;
+                case "incoming_message":
+                    this.props.dispatch(incomingMessage(message));
+                    break;
+                case "post_notification":
+                    this.props.dispatch(postNotification(message));
+                    break;
+                case "post_message":
+                    this.props.dispatch(postMessage(message))
+                    break;
+                case "change_userList":
+                    this.props.dispatch(changeUserList(message.userList))
+                    break;
+                case "change_username":
+                    this.props.dispatch(changeName(message.username))
+                    break;
+                default:
+                    throw new Error("Unknown event type " + message.type);
             }
         }
     }
@@ -28,8 +48,15 @@ class Main extends React.Component {
         return(
             <React.Fragment>
                 <Nav />
-                <MessageList/>
-                <ChatBar socket={this.socket}/>
+                <div className='row'>
+                    <div className='col-md-9'>
+                        <MessageList/>
+                        <ChatBar socket={this.socket}/>
+                    </div>
+                    <div className='col-md-3'>
+                        <UserList />
+                    </div>
+                </div>
             </React.Fragment>
         )
     }
