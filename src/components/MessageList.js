@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 const MessageList = (props) => {
     return (
-        <main className="messages">
+        <main className="messages col-xs-9">
             {props.messages.map((eachMessage, index) => (
                 <Message key={index} message={eachMessage}/>
             ))}

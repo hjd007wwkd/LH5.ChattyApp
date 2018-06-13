@@ -3,9 +3,15 @@ import {connect} from 'react-redux';
 
 const Nav = (props) => {
     return(
-        <nav className="navbar">
-            <a href="/" className="navbar-brand">Chatty</a>
-            <p className="count navbar-text navbar-right">{props.currentUserCount} Users Online</p>
+        <nav className="navbar navbar-inverse navbar-fixed-top">
+            <div className="container">
+                <div className="navbar-header">
+                    <a className="navbar-brand" href="/">
+                        Chatty
+                    </a>
+                </div>
+                <p className="count navbar-text navbar-right">{props.currentUserCount} Users Online</p>
+            </div>
         </nav>
     )
 }

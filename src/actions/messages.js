@@ -25,3 +25,17 @@ export const postNotification = (message) => (
         message: message
     }
 )
+
+export const connectNotification = (message) => (
+    {
+        type: 'connect_notification',
+        message: message
+    }
+)
+
+export const disconnectNotification = (message) => (
+    {
+        type: 'disconnect_notification',
+        message: message
+    }
+)

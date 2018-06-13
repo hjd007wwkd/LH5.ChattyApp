@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {incomingMessage, incomingNotification, postMessage, postNotification} from '../actions/messages';
+import {incomingMessage, incomingNotification, postMessage, postNotification, connectNotification, disconnectNotification} from '../actions/messages';
 import {changeUserList} from '../actions/userList';
 import {changeName} from '../actions/currentUser';
 import Nav from './Nav';
@@ -32,6 +32,12 @@ class Main extends React.Component {
                 case "post_message":
                     this.props.dispatch(postMessage(message))
                     break;
+                case "connect_notification":
+                    this.props.dispatch(connectNotification(message))
+                    break;
+                case "disconnect_notification":
+                    this.props.dispatch(disconnectNotification(message))
+                    break;
                 case "change_userList":
                     this.props.dispatch(changeUserList(message.userList))
                     break;
@@ -49,14 +55,10 @@ class Main extends React.Component {
             <React.Fragment>
                 <Nav />
                 <div className='row'>
-                    <div className='col-md-9'>
-                        <MessageList/>
-                        <ChatBar socket={this.socket}/>
-                    </div>
-                    <div className='col-md-3'>
-                        <UserList />
-                    </div>
+                    <MessageList/>
+                    <UserList />
                 </div>
+                <ChatBar socket={this.socket}/>
             </React.Fragment>
         )
     }

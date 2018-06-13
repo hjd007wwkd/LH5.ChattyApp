@@ -4,7 +4,7 @@ import User from './User';
 
 const UserList = (props) => {
     return(
-        <div>
+        <div className='user_list col-xs-3'>
             {props.currentUserList.map((user, index) => (
                 <User key={index} user={user}/>
             ))}

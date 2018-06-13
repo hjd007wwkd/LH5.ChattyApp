@@ -10,6 +10,10 @@ const messagesReducer = (state = messagesReducerDefaultState, action) => {
             return [...state, action.message]
         case 'post_notification':
             return [...state, action.message]
+        case 'connect_notification':
+            return [...state, action.message]
+        case 'disconnect_notification':
+            return [...state, action.message]
         default:
             return state;
     }
