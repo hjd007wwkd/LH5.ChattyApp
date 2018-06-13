@@ -11,9 +11,6 @@ import UserList from './UserList';
 class Main extends React.Component {
     constructor(props){
         super(props)
-    }
-
-    componentWillMount(){
         this.socket =  new WebSocket('ws://0.0.0.0:3001');
     }
     componentDidMount() {
