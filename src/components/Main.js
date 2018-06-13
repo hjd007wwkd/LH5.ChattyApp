@@ -8,9 +8,10 @@ import ChatBar from './ChatBar';
 import MessageList from './MessageList';
 import UserList from './UserList';
 
+//main page that combine all the subcomponent
 class Main extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.socket =  new WebSocket('ws://0.0.0.0:3001');
     }
     componentDidMount() {
@@ -27,24 +28,24 @@ class Main extends React.Component {
                     this.props.dispatch(postNotification(message));
                     break;
                 case "post_message":
-                    this.props.dispatch(postMessage(message))
+                    this.props.dispatch(postMessage(message));
                     break;
                 case "connect_notification":
-                    this.props.dispatch(connectNotification(message))
+                    this.props.dispatch(connectNotification(message));
                     break;
                 case "disconnect_notification":
-                    this.props.dispatch(disconnectNotification(message))
+                    this.props.dispatch(disconnectNotification(message));
                     break;
                 case "change_userList":
-                    this.props.dispatch(changeUserList(message.userList))
+                    this.props.dispatch(changeUserList(message.userList));
                     break;
                 case "change_username":
-                    this.props.dispatch(changeName(message.username))
+                    this.props.dispatch(changeName(message.username));
                     break;
                 default:
                     throw new Error("Unknown event type " + message.type);
-            }
-        }
+            };
+        };
     }
 
     render(){
@@ -57,8 +58,8 @@ class Main extends React.Component {
                 </div>
                 <ChatBar socket={this.socket}/>
             </React.Fragment>
-        )
+        );
     }
-}
+};
 
 export default connect()(Main);
