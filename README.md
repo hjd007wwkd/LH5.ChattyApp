@@ -11,6 +11,18 @@ A client-side SPA (single-page app) built with ReactJS, Redux, Webpack, Babel, N
 
 Clone the repo to your local machine.
 Install the dependencies and start the server.
+Before you start, create '.babelrc' file in the folder
+and add this script into the '.babelrc'
+
+{
+    "presets": [
+        "env",
+        "react"
+    ],
+    "plugins": [
+        "transform-object-rest-spread"
+    ]
+}
 
 1st server
 
